@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PowerGrid electricity bill estimator and billing history">
+  <title>PowerGrid | Electricity Bill Estimator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home"><span class="brand-mark">⚡</span><span>power<span class="brand-light">grid</span><small>ENERGY BILLING DESK</small></span></a>
+    <nav><a href="#home">Overview</a><a href="#calculator">New calculation</a><a href="#history">Saved bills</a></nav>
+    <span class="live-pill"><i></i> LOCAL ESTIMATOR</span>
+  </header>
+  <main class="wrap">
+    <section class="hero" id="home">
+      <div class="hero-copy"><p class="kicker">SMARTER ENERGY. CLEARER BILLS.</p><h1>Know your power.<br><em>Know your bill.</em></h1><p class="hero-text">Estimate monthly electricity charges from your meter readings, understand each charge, and keep a handy record of every calculation.</p><a class="cta" href="#calculator">Calculate a bill <span>↗</span></a></div>
+      <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="bolt">ϟ</div><div class="art-note"><span>ENERGY TRACKER</span><strong>kWh <b>→</b> ₹</strong><small>Readings into real numbers</small></div></div>
+    </section>
+    <section class="metric-grid" aria-label="Billing summary">
+      <article class="metric"><div class="metric-icon">▤</div><p>CALCULATIONS SAVED</p><strong id="billCount">0</strong><small>Stored on this browser</small></article>
+      <article class="metric"><div class="metric-icon">₹</div><p>MOST RECENT ESTIMATE</p><strong id="lastAmount">₹0.00</strong><small>Based on sample rates</small></article>
+      <article class="metric"><div class="metric-icon">ϟ</div><p>LATEST CONSUMPTION</p><strong><span id="lastUnits">0</span> <small>units</small></strong><small>1 unit = 1 kWh</small></article>
+    </section>
+    <section class="workspace" id="calculator">
+      <div class="section-intro"><div><p class="kicker">01 / BILL DETAILS</p><h2>Build an estimate</h2><p>Enter the details shown on a typical meter reading record.</p></div><span class="sample-tag">DEMO TARIFF</span></div>
+      <div class="calc-grid">
+        <form id="billForm" class="form-card">
+          <h3>Customer information</h3>
+          <div class="fields">
+            <label>Customer name<input id="customerName" required maxlength="70" placeholder="e.g. A. Kumar"></label>
+            <label>Consumer ID<input id="consumerId" required maxlength="30" placeholder="e.g. PG-20481"></label>
+            <label class="full">Service address<input id="address" required maxlength="120" placeholder="House number, street, city"></label>
+            <label>Billing month<input id="billingMonth" type="month" required></label>
+            <label>Connection type<select id="category"><option value="home">Domestic</option><option value="shop">Commercial</option></select></label>
+            <label>Previous reading (kWh)<input id="previous" type="number" min="0" step="any" required placeholder="e.g. 1240"></label>
+            <label>Current reading (kWh)<input id="current" type="number" min="0" step="any" required placeholder="e.g. 1395"></label>
+          </div>
+          <div class="usage-strip"><span><small>UNITS CONSUMED</small><strong id="unitPreview">— units</strong></span><span id="previewHint">Add both readings to preview usage.</span></div>
+          <p id="formError" class="error" role="alert"></p>
+          <div class="actions"><button class="btn-primary" type="submit">Calculate estimate <span>→</span></button><button class="btn-quiet" type="reset">Clear fields</button></div>
+        </form>
+        <aside class="side-info"><div class="info-card dark-card"><p class="kicker">HOW IT WORKS</p><h3>From reading<br>to amount.</h3><ol><li><span>1</span>Subtract previous reading from current reading.</li><li><span>2</span>Apply each slab rate only to units in that slab.</li><li><span>3</span>Add fixed charge and demo duty to get the estimate.</li></ol></div><div class="info-card tariff-card"><div class="card-title"><h3>Sample tariff</h3><span>₹ / unit</span></div><div class="rate-row"><span>First 100 units</span><b>₹1.80</b></div><div class="rate-row"><span>101–200 units</span><b>₹2.90</b></div><div class="rate-row"><span>201–300 units</span><b>₹4.20</b></div><div class="rate-row"><span>Above 300 units</span><b>₹6.10</b></div><p class="fineprint">Illustrative rates for academic demonstration only.</p></div></aside>
+      </div>
+    </section>
+    <section class="workspace result hidden" id="resultPanel"><div class="section-intro"><div><p class="kicker">02 / ESTIMATE GENERATED</p><h2>Your bill breakdown</h2><p>A transparent view of the estimated charges.</p></div><span class="sample-tag">NOT AN OFFICIAL BILL</span></div><div id="receipt" class="receipt"></div><div class="actions"><button id="printBill" class="btn-primary" type="button">Print / Save as PDF ↗</button><button id="newEstimate" class="btn-quiet" type="button">New calculation</button></div></section>
+    <section class="workspace" id="history"><div class="section-intro"><div><p class="kicker">03 / YOUR RECORDS</p><h2>Saved calculations</h2><p>Records stay in this browser using LocalStorage.</p></div><button id="clearHistory" class="btn-outline" type="button">Clear history</button></div><div class="history-tools"><input id="searchHistory" type="search" placeholder="Search by customer or consumer ID…" aria-label="Search saved bills"><span id="historyCount">0 records</span></div><div class="table-scroll"><table><thead><tr><th>Saved on</th><th>Customer</th><th>Consumer ID</th><th>Units</th><th>Estimate</th><th>Action</th></tr></thead><tbody id="historyBody"><tr><td colspan="6" class="empty">No calculations saved yet. Your next estimate will appear here.</td></tr></tbody></table></div></section>
+    <footer><a class="brand footer-brand" href="#home"><span class="brand-mark">⚡</span><span>power<span class="brand-light">grid</span></span></a><p>Student project · Electricity Bill Estimator</p><p>Sample rates only — check your provider for actual tariffs.</p></footer>
+  </main>
+  <script src="script.js"></script>
+</body></html>
